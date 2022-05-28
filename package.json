@@ -1,0 +1,29 @@
+{
+  "name": "AF-Dep",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"cd frontend && npm run build",
+    "install-frontend":"cd frontend && npm install",
+    "heroku-postbuild":"npm run install-frontend && npm run build",
+    "server":"cd backend && npm start",
+    "client":"cd frontend && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PasinduShavinda/AF-DEPLOY.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PasinduShavinda/AF-DEPLOY/issues"
+  },
+  "homepage": "https://github.com/PasinduShavinda/AF-DEPLOY#readme",
+  "dependencies": {
+    "concurrently": "^7.2.1"
+  }
+}

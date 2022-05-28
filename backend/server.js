@@ -15,9 +15,12 @@ const router12 = require("./routes/sug_TopicDock_Evaluvate_routes2");
 const router13= require("./routes/sug_Thesis_feedback_router");
 const router14= require("./routes/sug_Thesis_feedback_router2");
 const router15= require("./routes/th_group_router");
+require('dotenv').config();  
 
 const cors = require("cors");
 const app = express();
+
+const PORT = process.env.PORT || 5000;
 
 // Middlewares
 app.use(express.json());
@@ -45,8 +48,14 @@ app.get("/", (req, res) => {
 app.use("/auth", require("./routes/User"));
 app.use("/super", require("./routes/Supervisor"));
 app.use("/penal", require("./routes/Penalmember"));
+
+if(process.env.NODE_ENV === 'production'){
+
+  app.use(express.static('../frontend/build'))
+}
+
 mongoose
-  .connect(
+  .connect(process.env.MONGODB_URI ||
     "mongodb+srv://afProject2022:af2022proj12A@afprojectcluster.t6kdd.mongodb.net/RPMT_DB?retryWrites=true&w=majority",
     {
       useUnifiedTopology: true,
@@ -54,6 +63,6 @@ mongoose
   )
   .then(() => console.log("Connected To Database"))
   .then(() => {
-    app.listen(5000);
+    app.listen(PORT, console.log(`Server is running on ${PORT}`));
   })
   .catch((err) => console.log(err));
